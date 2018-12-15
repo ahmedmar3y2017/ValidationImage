@@ -33,7 +33,7 @@
 
 
 <body>
-aa
+
 <div class="avatar-upload">
     <div class="avatar-edit">
         <input type='file' id="userImage" name="userImage"

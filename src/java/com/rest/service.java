@@ -26,6 +26,10 @@ public class service {
     public Response validateImage(
             @FormDataParam("image") InputStream uploadedInputStream,
             @FormDataParam("image") FormDataContentDisposition fileDetail) throws IOException {
+
+        // check if all form parameters are provided
+        if (uploadedInputStream == null || fileDetail == null)
+            return Response.status(400).entity("Invalid form data").build();
         // check extensions
         String extensionImage = FilenameUtils.getExtension(fileDetail.getFileName());
         if (!imagesAvailableExtensios.contains(extensionImage)) {
@@ -34,9 +38,7 @@ public class service {
                     .build();
         }
         String uploadFolder = System.getProperty("user.home") + File.separator + "uploads";
-        // check if all form parameters are provided
-        if (uploadedInputStream == null || fileDetail == null)
-            return Response.status(400).entity("Invalid form data").build();
+
         // create our destination folder, if it not exists
         try {
             createFolderIfNotExists(uploadFolder);
@@ -77,7 +79,7 @@ public class service {
             return Response.status(500).entity("Can not save file").build();
         }
         return Response.status(200)
-                .entity("File saved to " + uploadedFileLocation).build();
+                .entity("Image Valid ").build();
 
 
     }
